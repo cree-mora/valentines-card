@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine, Blueberry?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #ff6f61;
+            font-size: 24px;
+            animation: colorChange 3s infinite alternate;
+        }
+        #bear {
+            width: 300px;
+            margin-bottom: 20px;
+            animation: shake 0.5s infinite alternate;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #ff6f61;
+            color: white;
+            margin: 10px;
+            animation: pulse 1.5s infinite alternate;
+        }
+        button.yes {
+            background-color: #ff6f61;
+        }
+        button.no {
+            background-color: #45aaf2;
+        }
+        button:hover {
+            background-color: #f8b400;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+        @keyframes shake {
+            0% {
+                transform: rotate(-2deg);
+            }
+            100% {
+                transform: rotate(2deg);
+            }
+        }
+        @keyframes colorChange {
+            0% {
+                color: #ff6f61;
+            }
+            50% {
+                color: #45aaf2;
+            }
+            100% {
+                color: #ff6f61;
+            }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f8b400;
+            animation: confetti-fall 4s linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Will You Be My Valentine, Blueberry?</h1>
+    <img id="bear" src="C:\Users\user\Downloads\goma-happy.gif" alt="">
+    <br>
+    <button class="yes" onclick="accept()">Yes</button>
+    <button class="no" onclick="reject()">No</button>
+
+    <script>
+        function accept() {
+            alert("Blueberry, will you be my Valentine?");
+            // Trigger celebration
+            triggerCelebration();
+        }
+
+        function reject() {
+            var yesButton = document.querySelector('.yes');
+            var fontSize = window.getComputedStyle(yesButton).fontSize;
+            fontSize = parseFloat(fontSize);
+            fontSize *= 1.1; // Increase by 10%
+            yesButton.style.fontSize = fontSize + 'px';
+        }
+
+        function triggerCelebration() {
+            // Create confetti elements
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.animationDelay = Math.random() * 4 + 's';
+            confetti.style.backgroundColor = getRandomColor();
+            document.body.appendChild(confetti);
+
+            // Remove confetti element after animation ends
+            confetti.addEventListener('animationend', () => {
+                confetti.remove();
+            });
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
